@@ -54,7 +54,7 @@ BOOL CTabWuJiangJunShi::OnInitDialog()
 	// TODO:  在此添加额外的初始化
 	IniWuJiangJi();
 	IniJunShiJi();
-	int ttt = 0;
+	//int ttt = 0;
 	CRect	rect;
 	m_onewujiangji.GetClientRect(&rect);
 	m_onewujiangji.SetExtendedStyle(m_onewujiangji.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
