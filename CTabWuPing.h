@@ -29,4 +29,16 @@ public:
 	CComboBox m_zhenXing;
 	CComboBox m_zhuBao;
 	virtual BOOL OnInitDialog();
+	CListCtrl m_lstBingFu;
+	CListCtrl m_lstZhenXing;
+	bool isinit = false;
+	afx_msg void OnCbnSelchangecmbbingfu();
+	afx_msg void OnCbnSelchangecmbwuqi();
+	afx_msg void OnCbnSelchangecmbbingshu();
+	afx_msg void OnCbnSelchangecmbma();
+	afx_msg void OnCbnSelchangecmbzhubao();
+	afx_msg void OnCbnSelchangecmbzhenxing();
+	afx_msg void OnBnClickedOk();
+	afx_msg void OnLvnItemchangedListBingfu(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnLvnItemchangedListZhenxing(NMHDR* pNMHDR, LRESULT* pResult);
 };

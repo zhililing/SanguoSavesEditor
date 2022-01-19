@@ -15,6 +15,10 @@
 using namespace std; 
 
 
+int indexBingQi;
+int indexBingShu;
+int indexMa;
+int indexZhuBao;
 
 map<int, string> SGQY2_WUJIANGJI;
 //	 = { {0x00, "无"},{0x01, "命疗术"}, {0x02, "落月弓"}, {0x03, "地泉"}, {0x04, "火箭"},
@@ -58,13 +62,13 @@ vector<string> SGQY2_BINGFU;
 //};
 
 
-vector<string> SGQY2_BINGSHU;
+map<int,string> SGQY2_BINGSHU;
 //; = {
 //	{ 48, "孙子兵法" }, { 49, "兵书24篇" }, { 50, "孟得新书" }, { 51, "史记" }, { 52, "春秋左传" }, { 53, "遁甲天书" },{ 54, "青囊书" }, { 55, "太平要术 " }
 //};
 
 
-vector<string> SGQY2_MALEI;
+map<int, string> SGQY2_MALEI;
 //	 = {
 //	{ 56, "黄鬃马" }, { 57, "褐鬃马" }, { 58, "黑鬃马" }, { 59, "大宛马" }, { 60, "铁骑马" }, { 61, "的卢" },{ 62, "爪黄飞电" }, { 63, "赤兔马" }
 //};
@@ -75,13 +79,13 @@ vector<string> SGQY2_ZHENFA;
 //	{ 64, "方形" }, { 65, "圆形" }, { 66, "锥形" }, { 67, "雁形" }, { 68, "玄襄" }, { 69, "鱼丽" },{ 70, "钩形" }, { 71, "冲锋" }, { 72, "箭矢 " }
 //};
 
-vector<string> SGQY2_ZHUBAO;
+map<int, string> SGQY2_ZHUBAO;
 //= {
 //	{ 73, "珠宝" }, { 74, "黄金" }, { 75, "美女" }, { 76, "玉器" }, { 77, "布匹 " }
 //};
 
 
-vector<string> SGQY2_BINGQI;
+map<int, string> SGQY2_BINGQI;
 //= {
 //
 //	{14, "直剑" }, { 15, "短锥枪" }, { 16, "铜枪" }, { 17, "眉尖刀" }, { 18, "吴钩" }, { 19, "钩镰枪" }, { 20, "蛇矛" }, { 21, "凤嘴刀" },
@@ -970,10 +974,21 @@ bool IniWuPing()
 
 	ifstream ifs(strFileName);
 
+	bool bInxBingQi = false;
+	bool bIdxBingShu = false;
+	bool bIdxMa = false;
+	bool bIdxZhuBao = false;
+	SGQY2_BINGFU.clear();
+	SGQY2_BINGQI.clear();
+	SGQY2_BINGSHU.clear();
+	SGQY2_MALEI.clear();
+	SGQY2_ZHENFA.clear();
+	SGQY2_ZHUBAO.clear();
 	string str;
 	while (getline(ifs, str))
 	{
 		//SGQY2_JUNSHIJI.insert(make_pair(i++, str));
+		i++;
 		vector<string> res = split(str, "|");
 		if (res[2] == "0")
 		{
@@ -981,15 +996,32 @@ bool IniWuPing()
 		}
 		if (res[2] == "1")
 		{
-			SGQY2_BINGQI.push_back(res[0]);
+			SGQY2_BINGQI.insert(make_pair(i, res[0]));
+			if (bInxBingQi == false)
+			{
+				indexBingQi = i;
+				bInxBingQi = true;
+			}
+			
+			
 		}
 		if (res[2] == "2")
 		{
-			SGQY2_BINGSHU.push_back(res[0]);
+			SGQY2_BINGSHU.insert(make_pair(i, res[0]));
+			if (bIdxBingShu == false)
+			{
+				indexBingShu = i;
+				bIdxBingShu = true;
+			}
 		}
 		if (res[2] == "3")
 		{
-			SGQY2_MALEI.push_back(res[0]);
+			SGQY2_MALEI.insert(make_pair(i, res[0]));
+			if (bIdxMa == false)
+			{
+				indexMa = i;
+				bIdxMa = true;
+			}
 		}
 		if (res[2] == "4")
 		{
@@ -997,7 +1029,12 @@ bool IniWuPing()
 		}
 		if (res[2] == "5")
 		{
-			SGQY2_ZHUBAO.push_back(res[0]);
+			SGQY2_ZHUBAO.insert(make_pair(i, res[0]));
+			if (bIdxZhuBao == false)
+			{
+				indexZhuBao = i;
+				bIdxZhuBao = true;
+			}
 		}
 	}
 
