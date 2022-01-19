@@ -11,6 +11,7 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std; 
 
 
@@ -50,37 +51,37 @@ map<int, string> SGQY2_JUNSHIJI;
 //	{ 0x40, "增强攻击（高）" }, { 0x41, "增加经验（高）" }, { 0x42, "喝咀敌军（高）" }, { 0x43, "强化武将（高）" }
 //};
 
-map<int, string> SGQY2_BINGFU;
+vector<string> SGQY2_BINGFU;
 //	 = {
 //	{ 0x01, "朴刀" }, { 0x02, "长枪" }, { 0x03, "大刀" }, { 0x04, "弓箭" }, { 0x05, "链锤" }, { 0x06, "飞刀" },{ 0x07, "武斗" }, { 0x08, "蛮族" },
 //	{ 0x09, "铁槌" }, { 0x0A, "藤甲" }, { 0x0B, "黄巾" }, { 0x0C, "弩兵" }, { 0x0D, "女兵" }
 //};
 
 
-map<int, string> SGQY2_BINGSHU;
+vector<string> SGQY2_BINGSHU;
 //; = {
 //	{ 48, "孙子兵法" }, { 49, "兵书24篇" }, { 50, "孟得新书" }, { 51, "史记" }, { 52, "春秋左传" }, { 53, "遁甲天书" },{ 54, "青囊书" }, { 55, "太平要术 " }
 //};
 
 
-map<int, string> SGQY2_MALEI;
+vector<string> SGQY2_MALEI;
 //	 = {
 //	{ 56, "黄鬃马" }, { 57, "褐鬃马" }, { 58, "黑鬃马" }, { 59, "大宛马" }, { 60, "铁骑马" }, { 61, "的卢" },{ 62, "爪黄飞电" }, { 63, "赤兔马" }
 //};
 
 
-map<int, string> SGQY2_ZHENFA;
+vector<string> SGQY2_ZHENFA;
 //= {
 //	{ 64, "方形" }, { 65, "圆形" }, { 66, "锥形" }, { 67, "雁形" }, { 68, "玄襄" }, { 69, "鱼丽" },{ 70, "钩形" }, { 71, "冲锋" }, { 72, "箭矢 " }
 //};
 
-map<int, string> SGQY2_ZHUBAO;
+vector<string> SGQY2_ZHUBAO;
 //= {
 //	{ 73, "珠宝" }, { 74, "黄金" }, { 75, "美女" }, { 76, "玉器" }, { 77, "布匹 " }
 //};
 
 
-map<int, string> SGQY2_BINGQI;
+vector<string> SGQY2_BINGQI;
 //= {
 //
 //	{14, "直剑" }, { 15, "短锥枪" }, { 16, "铜枪" }, { 17, "眉尖刀" }, { 18, "吴钩" }, { 19, "钩镰枪" }, { 20, "蛇矛" }, { 21, "凤嘴刀" },
@@ -919,6 +920,85 @@ bool IniJunShiJi()
 	while (getline(ifs, str))
 	{
 		SGQY2_JUNSHIJI.insert(make_pair(i++, str));
+	}
+
+	//while (file.ReadString(strValue))
+	//{
+	//	SGQY2_JUNSHIJI.insert(make_pair(i++, W2A(strValue)));
+	//}
+	//file.Close();
+	ifs.close();
+	return true;
+}
+
+vector<string> split(const string& str, const string& delim) 
+{
+	vector<string> res;
+	if ("" == str) return res;
+	//先将要切割的字符串从string类型转换为char*类型  
+	char* strs = new char[str.length() + 1]; //不要忘了  
+	strcpy(strs, str.c_str());
+
+	char* d = new char[delim.length() + 1];
+	strcpy(d, delim.c_str());
+
+	char* p = strtok(strs, d);
+	while (p) {
+		string s = p; //分割得到的字符串转换为string类型  
+		res.push_back(s); //存入结果数组  
+		p = strtok(NULL, d);
+	}
+
+	return res;
+}
+
+bool IniWuPing()
+{
+	USES_CONVERSION;
+	CStdioFile file;
+	TCHAR cPath[MAX_PATH];
+	GetModuleFileName(NULL, cPath, MAX_PATH);
+	int ss = CString(cPath).ReverseFind((TCHAR)'\\');
+	CString strFileName = CString(cPath).Left(ss) + "\\SYS\\Item.TXT";;
+	//if (!file.Open(strFileName, CFile::modeRead))
+	//{
+	//	return FALSE;
+	//}
+
+	//CString strValue = _T("");
+	int i = 0;
+
+	ifstream ifs(strFileName);
+
+	string str;
+	while (getline(ifs, str))
+	{
+		//SGQY2_JUNSHIJI.insert(make_pair(i++, str));
+		vector<string> res = split(str, "|");
+		if (res[2] == "0")
+		{
+			SGQY2_BINGFU.push_back(res[0]);
+		}
+		if (res[2] == "1")
+		{
+			SGQY2_BINGQI.push_back(res[0]);
+		}
+		if (res[2] == "2")
+		{
+			SGQY2_BINGSHU.push_back(res[0]);
+		}
+		if (res[2] == "3")
+		{
+			SGQY2_MALEI.push_back(res[0]);
+		}
+		if (res[2] == "4")
+		{
+			SGQY2_ZHENFA.push_back(res[0]);
+		}
+		if (res[2] == "5")
+		{
+			SGQY2_ZHUBAO.push_back(res[0]);
+		}
 	}
 
 	//while (file.ReadString(strValue))

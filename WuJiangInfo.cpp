@@ -165,10 +165,10 @@ BOOL CWuJiangInfo::OnInitDialog()
 	m_tabctrl.InsertItem(0, L"基本");      //添加参数一选项卡 
 
 	m_tabctrl.InsertItem(1, L"武将军师计");      //添加参数二选项卡
-	 
+	m_tabctrl.InsertItem(2, L"物品");
 	m_base.Create(IDD_DIALOG1, GetDlgItem(IDC_TAB1));
 	m_wujiangjunshi.Create(IDD_DIALOG2, GetDlgItem(IDC_TAB1));
-
+	m_wuPing.Create(IDD_DIALOG3, GetDlgItem(IDC_TAB1));
 	//获得IDC_TABTEST客户区大小
 
 	CRect rs;
@@ -181,6 +181,7 @@ BOOL CWuJiangInfo::OnInitDialog()
 	//设置子对话框尺寸并移动到指定位置
 	m_base .MoveWindow(&rs);
 	m_wujiangjunshi.MoveWindow(&rs);
+	m_wuPing.MoveWindow(&rs);
 	//分别设置隐藏和显示
 	m_base.ShowWindow(1);
 	m_wujiangjunshi.ShowWindow(0);
@@ -236,10 +237,17 @@ void CWuJiangInfo::OnTcnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
 		case 0:
 			m_base.ShowWindow(true);
 			m_wujiangjunshi.ShowWindow(false);
+			m_wuPing.ShowWindow(false);
 			break;
 		case 1:
 			m_base.ShowWindow(false);
 			m_wujiangjunshi.ShowWindow(true);
+			m_wuPing.ShowWindow(false);
+			break;
+		case 2:
+			m_base.ShowWindow(false);
+			m_wujiangjunshi.ShowWindow(false);
+			m_wuPing.ShowWindow(true);
 			break;
 		default:
 			break;

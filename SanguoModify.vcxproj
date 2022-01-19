@@ -105,6 +105,7 @@
   <ItemGroup>
     <ClInclude Include="CTabBase.h" />
     <ClInclude Include="CTabWuJiangJunShi.h" />
+    <ClInclude Include="CTabWuPing.h" />
     <ClInclude Include="DlgColor.h" />
     <ClInclude Include="EditListCtrl.h" />
     <ClInclude Include="Externs.h" />
@@ -122,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="CTabBase.cpp" />
     <ClCompile Include="CTabWuJiangJunShi.cpp" />
+    <ClCompile Include="CTabWuPing.cpp" />
     <ClCompile Include="DlgColor.cpp" />
     <ClCompile Include="EditListCtrl.cpp" />
     <ClCompile Include="Globals.cpp" />

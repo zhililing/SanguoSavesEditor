@@ -1,6 +1,7 @@
 #pragma once
 #include "CTabBase.h"
 #include "CTabWuJiangJunShi.h"
+#include "CTabWuPing.h"
 
 
 // CWuJiangInfo ¶Ô»°¿ò
@@ -86,4 +87,5 @@ public:
 	CTabBase m_base;
 	CTabWuJiangJunShi m_wujiangjunshi;
 	afx_msg void OnTcnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult);
+	CTabWuPing m_wuPing;
 };

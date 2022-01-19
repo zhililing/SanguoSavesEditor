@@ -5,7 +5,7 @@
 #include "Globals.h"
 #include <map>
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 extern WuJiang *pWuJiang;
@@ -28,11 +28,12 @@ extern void TranslateNameToGB2312Unicode(void);
 extern wchar_t* BIG5ToUnicode(const TCHAR* szBIG5String);
 extern  map<int, string> SGQY2_WUJIANGJI;
 extern  map<int, string> SGQY2_JUNSHIJI;
-extern  map<int, string> SGQY2_BINGFU;
-extern  map<int, string> SGQY2_BINGSHU;
-extern  map<int, string> SGQY2_MALEI;
-extern  map<int, string> SGQY2_ZHENFA;
-extern  map<int, string> SGQY2_ZHUBAO;
-extern  map<int, string> SGQY2_BINGQI;
-extern bool IniWuJiangJi();
-extern bool IniJunShiJi();
+extern  vector<string> SGQY2_BINGFU;
+extern  vector<string> SGQY2_BINGSHU;
+extern  vector<string> SGQY2_MALEI;
+extern  vector<string> SGQY2_ZHENFA;
+extern  vector<string> SGQY2_ZHUBAO;
+extern  vector<string> SGQY2_BINGQI;
+extern	bool IniWuJiangJi();
+extern	bool IniJunShiJi();
+extern	bool IniWuPing();
