@@ -41,3 +41,5 @@ extern	int indexBingQi;
 extern	int indexBingShu;
 extern	int indexMa;
 extern	int indexZhuBao;
+extern	vector<string> ScanFile(CString Dir);
+extern	string GetExePath(void);

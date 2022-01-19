@@ -40,6 +40,7 @@ void CSanguoModifyDlg::DoDataExchange(CDataExchange* pDX)
 	//  DDX_Control(pDX, IDC_BtnGroupModify, m_mBtnGroupModify);
 	DDX_Control(pDX, IDC_BtnGroupModify, m_BtnGroupModify);
 	DDX_Control(pDX, IDC_BtnSave, m_BtnSave);
+	DDX_Control(pDX, IDC_COMBO_SelectVersion, m_selectVersion);
 }
 
 BEGIN_MESSAGE_MAP(CSanguoModifyDlg, CDialogEx)
@@ -51,6 +52,7 @@ BEGIN_MESSAGE_MAP(CSanguoModifyDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BtnSave, &CSanguoModifyDlg::OnBnClickedBtnsave)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST_WUJIANG, &CSanguoModifyDlg::OnNMDblclkListWujiang)
 	ON_BN_CLICKED(IDC_BtnGroupModify, &CSanguoModifyDlg::OnBnClickedBtngroupmodify)
+	ON_CBN_SELCHANGE(IDC_COMBO_SelectVersion, &CSanguoModifyDlg::OnCbnSelchangeComboSelectversion)
 END_MESSAGE_MAP()
 
 
@@ -109,8 +111,16 @@ BOOL CSanguoModifyDlg::OnInitDialog()
 	m_ListWuJiang.InsertColumn(27, _T("未知"), LVCFMT_LEFT, 40, 24);
 	m_ListWuJiang.InsertColumn(28, _T("未知"), LVCFMT_LEFT, 40, 24);
 
-
-
+	string str = GetExePath();
+	CString cstr(str.c_str());
+	vector<string> dirVec = ScanFile(cstr);
+	for (size_t i = 0; i < dirVec.size(); i++)
+	{
+		//LPCTSTR cstr = (LPCTSTR)dirVec[i].c_str();
+		CString cstr2(dirVec[i].c_str());
+		m_selectVersion.AddString(cstr2);
+	}
+	//m_selectVersion.SetCurSel(0);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -450,4 +460,19 @@ void CSanguoModifyDlg::OnBnClickedBtngroupmodify()
 
 	OnCbnSelchangeComboKingsname();		//刷新显示
 
+}
+
+
+void CSanguoModifyDlg::OnCbnSelchangeComboSelectversion()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	string str = GetExePath();
+	CString cstr(str.c_str());
+	CString temp;
+	int i = m_selectVersion.GetCurSel();//获取索引，0-N
+	m_selectVersion.GetLBText(i, temp);
+	int i2 = 5;
+	i2 = CopyFile(cstr + "//" + temp + L"//AttackSkill.TXT", cstr + L"//SYS//AttackSkill.TXT", FALSE);
+	i2 = CopyFile(cstr + "//" + temp + L"//Item.txt", cstr + L"//SYS//Item.txt", FALSE);
+	i2 = CopyFile(cstr + "//" + temp + L"//StrategicSkill.TXT", cstr + L"//SYS//StrategicSkill.TXT", FALSE);
 }

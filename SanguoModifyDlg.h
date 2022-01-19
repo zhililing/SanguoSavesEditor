@@ -52,4 +52,6 @@ public:
 //	CButton m_mBtnGroupModify;
 	CButton m_BtnGroupModify;
 	CButton m_BtnSave;
+	afx_msg void OnCbnSelchangeComboSelectversion();
+	CComboBox m_selectVersion;
 };

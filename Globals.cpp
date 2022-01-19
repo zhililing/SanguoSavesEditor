@@ -1046,6 +1046,51 @@ bool IniWuPing()
 	ifs.close();
 	return true;
 }
+vector<string> ScanFile(CString Dir)
+{
+	CFileFind finder;
+	CString Add = L"\\*";
+	CString DirSpec = Dir + Add;                        //补全要遍历的文件夹的目录
+	BOOL bWorking = finder.FindFile(DirSpec);
+	vector<string> dirVec;
+	while (bWorking)
+	{
+		bWorking = finder.FindNextFile();
+		if (!finder.IsDots())              //扫描到的不是节点
+		{
+			if (finder.IsDirectory())           //扫描到的是文件夹
+			{
+				CString strDirectory = finder.GetFileName(); 
+				string sz2 = CT2A(strDirectory.GetBuffer());
+				if (strDirectory != L"SYS" && strDirectory != L"SanguoModify.tlog")
+				{
+					dirVec.push_back(sz2);
+				}
+				//dirVec.push_back(sz2);
+
+			
+				//ScanFile(strDirectory);           //递归调用ScanFile（）
+			}
+			else                               //扫描到的是文件
+			{
+				//CString strFile = finder.GetFilePath();     得到文件的全路径
+							   //进行一系列自定义操作
+			}
+		}
+	}
+	finder.Close();
+	return dirVec;
+}
+
+string GetExePath(void)
+{
+	char szFilePath[MAX_PATH + 1] = { 0 };
+	GetModuleFileNameA(NULL, szFilePath, MAX_PATH);
+	(strrchr(szFilePath, '\\'))[0] = 0; // 删除文件名，只获得路径字串
+	string path = szFilePath;
+
+	return path;
+}
 
 int CharToUnicode(char* pchIn, CString* pstrOut)
 
