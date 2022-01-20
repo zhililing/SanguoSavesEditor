@@ -88,4 +88,5 @@ public:
 	CTabWuJiangJunShi m_wujiangjunshi;
 	afx_msg void OnTcnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult);
 	CTabWuPing m_wuPing;
+	virtual void OnCancel();
 };
