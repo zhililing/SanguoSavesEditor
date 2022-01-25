@@ -254,3 +254,11 @@ void CWuJiangInfo::OnTcnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 	*pResult = 0;
 }
+
+
+void CWuJiangInfo::OnCancel()
+{
+	// TODO: 在此添加专用代码和/或调用基类
+	m_wuPing.isinit = false;
+	CDialogEx::OnCancel();
+}
