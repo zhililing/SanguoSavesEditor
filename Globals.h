@@ -11,9 +11,10 @@ using namespace std;
 #define nKingDataSize				0x00000352
 #define	nFirstCityDataOffset		0x00006C10
 #define	nWupinSearchedDataOffset	0x00033230
-
-
-
+#define nFirstCityDataOffset		0x00006C10
+#define nCityDataSize				0x000000B2
+#define	nFirstTeamDataOffset		0x00009890
+#define	nTeamDataSize				0x00000070
 struct FileHeader{
 	unsigned int	nIdentify;
 	unsigned int	nVersion;
@@ -81,6 +82,95 @@ struct King{
 	unsigned int	pKingAtKingNodeIndex;
 };
 
+struct City {
+	unsigned int	size;
+	unsigned int	isUsed;
+	TCHAR			szName[6];
+	unsigned int	pKingofCityAtKingNodeIndex;
+	unsigned int	pMajorofCityAtWuJiangNodeIndex;
+	unsigned int	pJunShioffCityAtWuJiangNodeIndex;
+	unsigned int	unKnow1;		//恒为0
+	unsigned int	unKnow2;		//恒为0
+	unsigned int	pFirstWujiangOfCityAtWuJiangNodeIndex;	//属于君主的武将链表的下一个节点，君主为第一个武将
+	unsigned int	unKnow3;
+	unsigned int	unKnow4;
+	unsigned int	pNumWuJiangofCity;
+	unsigned int	pNumWuJiangCapturedofCity;
+	unsigned int	unKnow5;
+	unsigned int	unKnow6;
+	unsigned int	unKnow7;
+
+	unsigned int	nCapacityWuJiangofcity;
+
+	unsigned int	nPathofCity[9];
+
+	short			Level;
+	unsigned int	unKnow8;
+
+	short			CenterX;
+	short			CenterY;
+
+	short			Left;
+	short			ToP;
+
+	short			Right;
+	short			Bottom;
+
+	short			FlagX;
+	short			FlagY;
+
+	unsigned int	unKnow9;
+
+	unsigned int	nMaxSoilder;
+	unsigned int	nSoilder;
+	unsigned int	nPersonalofCity;
+	unsigned int	nDefenderofCity;
+	unsigned int	nMoneyofCity;
+	unsigned int	nIndexofCity;
+	unsigned int	nSpeedofCity;
+	unsigned int	nFlagIndexofCity;
+	unsigned int	nNextCityIndex;
+	unsigned int	pNextCityAtCityIndex;
+};
+
+struct Team {
+	unsigned int	size;
+	unsigned int	type;
+	unsigned short  index;
+	unsigned short  startindex;
+	
+	unsigned int	pKingofTeamAtKingNodeIndex;
+	unsigned int	pMajorofTeamAtWuJiangNodeIndex;
+	unsigned int	pJunShiofTeamAtWuJiangNodeIndex;
+	unsigned int	unKnow1;		//恒为0
+	unsigned int	unKnow2;		//恒为0
+	unsigned int	pFirstWujiangOfTeamAtWuJiangNodeIndex;	//属于君主的武将链表的下一个节点，君主为第一个武将
+	unsigned int	money;
+	unsigned int	teamDirect;
+	unsigned int	x;
+	unsigned int	y;
+	unsigned short	status;
+	unsigned short	unKnow3;
+	unsigned short	unKnow4;
+	unsigned int	unKnow5;
+
+	unsigned int	nearCityIndex;
+
+	unsigned int	teamStartCity;
+
+	unsigned int	teamDestCity;
+	unsigned int	teamCrossCity;
+	unsigned int	teamPathIndex;
+	unsigned int	unknow6;
+	unsigned int	unknow7;
+	unsigned int	unknow8;
+	unsigned int	unknow9;
+	unsigned int	ever01;
+	unsigned int	ever02;
+	unsigned int	pNextTeamAtSameKingIndex;
+	unsigned int	pNextTeamIndex;
+};
+
 // CSanguo2SaveChangeDlg 對話方塊
 struct WuJiang{
 	int size;			//武将存档大小
@@ -135,8 +225,10 @@ struct WuJiang{
 	int		xuetongsuoyin;		//武将血统将的索引
 	short	jiecao;				//武将节操值
 	short	unknow9;			//未知
-	int		suoyinzhi[10];		//链表索引值，默认为FFFFFF
+	int		suoyinzhi;		//链表索引值，默认为FFFFFF
 	int		nextindex;			//武将链表中下一个武将的索引
+	int		duiWuIndex;
+	int     cityIndex;
 };
 
 class finder

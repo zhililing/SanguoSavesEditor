@@ -559,11 +559,14 @@ unsigned short BIG5_GB2312SANGUO[][3] =		//此列表为武将名中所有中文的BIG编码对应
 0xf545,'阚',0x961A
 
 };
-
+Team* pTeam;
+City* pCity;
 WuJiang* pWuJiang;
 FileHeader* pFileHeader;
 King* pKing;
 int		nCurrentWuJiangID(0);
+int		nCurrentCityID(0);
+int		nCurrentTeamID(0);
 FILE* fp;
 int nFileSize;
 byte FileContent[300000];

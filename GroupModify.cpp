@@ -138,10 +138,10 @@ void CGroupModify::OnBnClickedBtnexportlist()
 		sprintf(szTmp,"%d\t",pWuJiang->nextindex);
 		fwrite(szTmp,1,strlen(szTmp),fp);
 
-		sprintf(szTmp,"%d\t",pWuJiang->suoyinzhi[0]);
+		sprintf(szTmp,"%d\t",pWuJiang->suoyinzhi);
 		fwrite(szTmp,1,strlen(szTmp),fp);
 
-		sprintf(szTmp,"%d\t",pWuJiang->suoyinzhi[1]);
+		/*sprintf(szTmp,"%d\t",pWuJiang->suoyinzhi[1]);
 		fwrite(szTmp,1,strlen(szTmp),fp);
 
 		sprintf(szTmp,"%d\t",pWuJiang->suoyinzhi[2]);
@@ -166,7 +166,7 @@ void CGroupModify::OnBnClickedBtnexportlist()
 		fwrite(szTmp,1,strlen(szTmp),fp);
 
 		sprintf(szTmp,"%d\n",pWuJiang->suoyinzhi[9]);
-		fwrite(szTmp,1,strlen(szTmp),fp);
+		fwrite(szTmp,1,strlen(szTmp),fp);*/
 	}
 	fclose(fp);
 
@@ -184,7 +184,7 @@ void CGroupModify::OnBnClickedBtnwuliup()
 	for(int index = 0; index < pFileHeader->pWujiangTailNodeIndex+1 ;index++){	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F );  //武将记录位置
-		if(pWuJiang->suoyinzhi[0] == pFileHeader->SelectedKingIndex){
+		if(pWuJiang->suoyinzhi == pFileHeader->SelectedKingIndex){
 			pWuJiang->wuli = pWuJiang->wuli + 10;
 		}
 
@@ -203,7 +203,7 @@ void CGroupModify::OnBnClickedBtnwulidown()
 	for(int index = 0; index < pFileHeader->pWujiangTailNodeIndex+1 ;index++){	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F );  //武将记录位置
-		if( (pWuJiang->suoyinzhi[0] != pFileHeader->SelectedKingIndex) &&  (pWuJiang->wuli > 60) ){
+		if( (pWuJiang->suoyinzhi != pFileHeader->SelectedKingIndex) &&  (pWuJiang->wuli > 60) ){
 			pWuJiang->wuli = pWuJiang->wuli - 10;
 		}
 	}
@@ -220,7 +220,7 @@ void CGroupModify::OnBnClickedBtnzhongchengdong()
 	for(int index = 0; index < pFileHeader->pWujiangTailNodeIndex+1 ;index++){	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F );  //武将记录位置
-		if( (pWuJiang->suoyinzhi[0] != pFileHeader->SelectedKingIndex) &&  (pWuJiang->zhongcheng > 30) ){
+		if( (pWuJiang->suoyinzhi != pFileHeader->SelectedKingIndex) &&  (pWuJiang->zhongcheng > 30) ){
 			pWuJiang->zhongcheng = pWuJiang->zhongcheng - 10;
 		}
 	}
@@ -238,7 +238,7 @@ void CGroupModify::OnBnClickedBtnjiliup()
 	for(int index = 0; index < pFileHeader->pWujiangTailNodeIndex+1 ;index++){	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F );  //武将记录位置
-		if(pWuJiang->suoyinzhi[0] == pFileHeader->SelectedKingIndex){
+		if(pWuJiang->suoyinzhi == pFileHeader->SelectedKingIndex){
 			pWuJiang->zhili = pWuJiang->zhili + 10;
 		}
 	}
@@ -257,7 +257,7 @@ void CGroupModify::OnBnClickedBtnjilidown()
 	for(int index = 0; index < pFileHeader->pWujiangTailNodeIndex+1 ;index++){	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F );  //武将记录位置
-		if( (pWuJiang->suoyinzhi[0] != pFileHeader->SelectedKingIndex) &&  (pWuJiang->zhili > 60) ){
+		if( (pWuJiang->suoyinzhi != pFileHeader->SelectedKingIndex) &&  (pWuJiang->zhili > 60) ){
 			pWuJiang->zhili = pWuJiang->zhili - 10;
 		}
 	}
@@ -296,7 +296,7 @@ void CGroupModify::OnBnClickedBtnzhongchengdongup()
 	for (int index = 0; index < pFileHeader->pWujiangTailNodeIndex + 1; index++) {	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F);  //武将记录位置
-		if ((pWuJiang->suoyinzhi[0] == pFileHeader->SelectedKingIndex)) {
+		if ((pWuJiang->suoyinzhi == pFileHeader->SelectedKingIndex)) {
 			
 
 			if (pWuJiang->zhongcheng <= 90)
@@ -321,7 +321,7 @@ void CGroupModify::OnBnClickedBtnshiqiup()
 	for (int index = 0; index < pFileHeader->pWujiangTailNodeIndex + 1; index++) {	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F);  //武将记录位置
-		if ((pWuJiang->suoyinzhi[0] == pFileHeader->SelectedKingIndex)) {
+		if ((pWuJiang->suoyinzhi == pFileHeader->SelectedKingIndex)) {
 			
 			if (pWuJiang->shiqi <= 90)
 			{
@@ -347,7 +347,7 @@ void CGroupModify::OnBnClickedBtnshiqidown()
 	for (int index = 0; index < pFileHeader->pWujiangTailNodeIndex + 1; index++) {	//武将数量为0x200=512,实际数量为409，最后一个为“黄皓”
 
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + index * 0x11F);  //武将记录位置
-		if ((pWuJiang->suoyinzhi[0] != pFileHeader->SelectedKingIndex)) {
+		if ((pWuJiang->suoyinzhi != pFileHeader->SelectedKingIndex)) {
 			
 
 			if (pWuJiang->shiqi >= 10)

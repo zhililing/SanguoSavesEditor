@@ -103,9 +103,13 @@
     <None Include="res\SanguoModify.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCity.h" />
+    <ClInclude Include="CCityInfo.h" />
     <ClInclude Include="CTabBase.h" />
     <ClInclude Include="CTabWuJiangJunShi.h" />
     <ClInclude Include="CTabWuPing.h" />
+    <ClInclude Include="CTeam.h" />
+    <ClInclude Include="CTeamInfo.h" />
     <ClInclude Include="DlgColor.h" />
     <ClInclude Include="EditListCtrl.h" />
     <ClInclude Include="Externs.h" />
@@ -121,9 +125,13 @@
     <ClInclude Include="WuJiangInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CCity.cpp" />
+    <ClCompile Include="CCityInfo.cpp" />
     <ClCompile Include="CTabBase.cpp" />
     <ClCompile Include="CTabWuJiangJunShi.cpp" />
     <ClCompile Include="CTabWuPing.cpp" />
+    <ClCompile Include="CTeam.cpp" />
+    <ClCompile Include="CTeamInfo.cpp" />
     <ClCompile Include="DlgColor.cpp" />
     <ClCompile Include="EditListCtrl.cpp" />
     <ClCompile Include="Globals.cpp" />

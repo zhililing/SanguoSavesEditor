@@ -99,7 +99,7 @@ BOOL CTabBase::OnInitDialog()
 	m_nStatus = pWuJiang->wujiangzhuangtai;
 	m_nLost = pWuJiang->baichang;
 	m_nWin = pWuJiang->shengchang;
-	m_nKingIndex = pWuJiang->suoyinzhi[0];
+	m_nKingIndex = pWuJiang->suoyinzhi;
 
 
 	SetDlgItemText(IDC_STATIC1, L"武将姓名");

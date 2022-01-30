@@ -18,9 +18,14 @@
 #define new DEBUG_NEW
 #endif
 #include <iostream>
+#include "CCity.h"
+#include "CCityInfo.h"
+#include "CTeam.h"
 
-CWuJiangInfo m_WuJiangInfo;
-CGroupModify m_GroupModify;
+
+
+
+
 
 // CSanguoModifyDlg 对话框
 
@@ -41,6 +46,8 @@ void CSanguoModifyDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BtnGroupModify, m_BtnGroupModify);
 	DDX_Control(pDX, IDC_BtnSave, m_BtnSave);
 	DDX_Control(pDX, IDC_COMBO_SelectVersion, m_selectVersion);
+	DDX_Control(pDX, IDC_BUTTON1, m_city);
+	DDX_Control(pDX, IDC_BUTTON2, m_team);
 }
 
 BEGIN_MESSAGE_MAP(CSanguoModifyDlg, CDialogEx)
@@ -53,6 +60,8 @@ BEGIN_MESSAGE_MAP(CSanguoModifyDlg, CDialogEx)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST_WUJIANG, &CSanguoModifyDlg::OnNMDblclkListWujiang)
 	ON_BN_CLICKED(IDC_BtnGroupModify, &CSanguoModifyDlg::OnBnClickedBtngroupmodify)
 	ON_CBN_SELCHANGE(IDC_COMBO_SelectVersion, &CSanguoModifyDlg::OnCbnSelchangeComboSelectversion)
+	ON_BN_CLICKED(IDC_BUTTON1, &CSanguoModifyDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON2, &CSanguoModifyDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -76,6 +85,8 @@ BOOL CSanguoModifyDlg::OnInitDialog()
 	m_BtnGroupModify.EnableWindow(FALSE);
 	m_BtnSave.EnableWindow(FALSE);
 	m_ComboKingsName.EnableWindow(FALSE);
+	m_city.EnableWindow(FALSE);
+	m_team.EnableWindow(FALSE);
 
 	SetDlgItemText(IDC_STATIC_Kings,L"选择君主");
 	SetDlgItemText(IDC_STATIC,L"\n点击 \"打开文件\" 读入存档文件");
@@ -229,35 +240,35 @@ void CSanguoModifyDlg::AddRecord(int index)
 	wsprintf(szTmp,L"%d",pWuJiang->nextindex);
 	m_ListWuJiang.SetItemText(nLastRow, 18,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[0]);
+	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi);
 	m_ListWuJiang.SetItemText(nLastRow, 19,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[1]);
-	m_ListWuJiang.SetItemText(nLastRow, 20,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[1]);
+	//m_ListWuJiang.SetItemText(nLastRow, 20,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[2]);
-	m_ListWuJiang.SetItemText(nLastRow, 21,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[2]);
+	//m_ListWuJiang.SetItemText(nLastRow, 21,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[3]);
-	m_ListWuJiang.SetItemText(nLastRow, 22,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[3]);
+	//m_ListWuJiang.SetItemText(nLastRow, 22,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[4]);
-	m_ListWuJiang.SetItemText(nLastRow, 23,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[4]);
+	//m_ListWuJiang.SetItemText(nLastRow, 23,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[5]);
-	m_ListWuJiang.SetItemText(nLastRow, 24,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[5]);
+	//m_ListWuJiang.SetItemText(nLastRow, 24,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[6]);
-	m_ListWuJiang.SetItemText(nLastRow, 25,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[6]);
+	//m_ListWuJiang.SetItemText(nLastRow, 25,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[7]);
-	m_ListWuJiang.SetItemText(nLastRow, 26,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[7]);
+	//m_ListWuJiang.SetItemText(nLastRow, 26,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[8]);
-	m_ListWuJiang.SetItemText(nLastRow, 27,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[8]);
+	//m_ListWuJiang.SetItemText(nLastRow, 27,szTmp);
 
-	wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[9]);
-	m_ListWuJiang.SetItemText(nLastRow, 28,szTmp);
+	//wsprintf(szTmp,L"%d",pWuJiang->suoyinzhi[9]);
+	//m_ListWuJiang.SetItemText(nLastRow, 28,szTmp);
 }
 
 
@@ -291,7 +302,7 @@ void CSanguoModifyDlg::OnCbnSelchangeComboKingsname()
 		pWuJiang = (WuJiang*)(FileContent + nFirstWuJiangDataOffset + i * 0x11F );  //武将记录位置
 		if(nSel == m_ComboKingsName.GetCount()-1){
 			AddRecord(i);								//全部武将
-		}else if(nSel == pWuJiang->suoyinzhi[0]) {
+		}else if(nSel == pWuJiang->suoyinzhi) {
 			AddRecord(i);								//君主武将
 		}	
 	}
@@ -344,7 +355,8 @@ void CSanguoModifyDlg::OnBnClickedBtnopen()
 		m_BtnGroupModify.EnableWindow(TRUE);
 		m_BtnSave.EnableWindow(TRUE);
 		m_ComboKingsName.EnableWindow(TRUE);
-
+		m_city.EnableWindow(TRUE);
+		m_team.EnableWindow(TRUE);
 		memset(FileContent,0,sizeof(FileContent));
 	}
 	nFileSize = fread(FileContent,1,300000,fp);
@@ -446,7 +458,7 @@ void CSanguoModifyDlg::OnNMRClickListWujiang(NMHDR *pNMHDR, LRESULT *pResult)
 	CString szWuJiangID = m_ListWuJiang.GetItemText(nCurrSel-1,0);
 
 	nCurrentWuJiangID = _ttoi(szWuJiangID);
-
+	CWuJiangInfo m_WuJiangInfo;
 	m_WuJiangInfo.DoModal();
 
 	OnCbnSelchangeComboKingsname();		//刷新显示
@@ -456,6 +468,8 @@ void CSanguoModifyDlg::OnNMRClickListWujiang(NMHDR *pNMHDR, LRESULT *pResult)
 void CSanguoModifyDlg::OnBnClickedBtngroupmodify()
 {
 	// TODO: 在此添加控件通知处理程序代码
+
+	CGroupModify m_GroupModify;
 	m_GroupModify.DoModal();
 
 	OnCbnSelchangeComboKingsname();		//刷新显示
@@ -475,4 +489,20 @@ void CSanguoModifyDlg::OnCbnSelchangeComboSelectversion()
 	i2 = CopyFile(cstr + "//" + temp + L"//AttackSkill.TXT", cstr + L"//SYS//AttackSkill.TXT", FALSE);
 	i2 = CopyFile(cstr + "//" + temp + L"//Item.txt", cstr + L"//SYS//Item.txt", FALSE);
 	i2 = CopyFile(cstr + "//" + temp + L"//StrategicSkill.TXT", cstr + L"//SYS//StrategicSkill.TXT", FALSE);
+}
+
+
+void CSanguoModifyDlg::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CCity m_dlgCity;
+	m_dlgCity.DoModal();
+}
+
+
+void CSanguoModifyDlg::OnBnClickedButton2()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CTeam m_dlgTeam;
+	m_dlgTeam.DoModal();
 }

@@ -72,6 +72,18 @@
     <ClInclude Include="CTabWuPing.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CCity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CCityInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CTeam.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CTeamInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SanguoModify.cpp">
@@ -111,6 +123,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="CTabWuPing.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CCity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CCityInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CTeam.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CTeamInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

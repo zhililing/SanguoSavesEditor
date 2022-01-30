@@ -8,10 +8,15 @@
 #include <vector>
 using namespace std;
 
+
+extern City *pCity;
+extern Team* pTeam;
 extern WuJiang *pWuJiang;
 extern FileHeader *pFileHeader;
 extern King	*pKing;
 extern int		nCurrentWuJiangID;
+extern int		nCurrentCityID;
+extern int		nCurrentTeamID;
 extern FILE *fp;
 extern int nFileSize;
 extern byte FileContent[300000];

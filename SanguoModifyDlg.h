@@ -54,4 +54,8 @@ public:
 	CButton m_BtnSave;
 	afx_msg void OnCbnSelchangeComboSelectversion();
 	CComboBox m_selectVersion;
+	afx_msg void OnBnClickedButton1();
+	CButton m_city;
+	afx_msg void OnBnClickedButton2();
+	CButton m_team;
 };
